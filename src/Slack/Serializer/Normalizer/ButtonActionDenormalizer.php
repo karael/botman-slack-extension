@@ -13,7 +13,7 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
  */
 class ButtonActionDenormalizer implements DenormalizerInterface
 {
-    public function denormalize($data, $class, $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         return new ButtonActionSlackEvent(
             $data['actions'][0]['name'],
@@ -28,7 +28,7 @@ class ButtonActionDenormalizer implements DenormalizerInterface
         );
     }
 
-    public function supportsDenormalization($data, $type, $format = null)
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return
             SlackEventInterface::class === $type
@@ -38,5 +38,10 @@ class ButtonActionDenormalizer implements DenormalizerInterface
             && isset($data['actions'][0]['type'])
             && 'button' === $data['actions'][0]['type']
         ;
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [SlackEventInterface::class => false];
     }
 }

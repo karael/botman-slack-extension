@@ -12,7 +12,7 @@ use Labdotgif\Slack\Event\SlackEvents;
  */
 class MemberJoinedChannelEventDenormalizer extends EventDenormalizer
 {
-    public function denormalize($data, $class, $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         return new MemberJoinedChannelEventSlackEvent(
             $data['event']['type'],
@@ -21,7 +21,7 @@ class MemberJoinedChannelEventDenormalizer extends EventDenormalizer
         );
     }
 
-    public function supportsDenormalization($data, $type, $format = null)
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         if (!parent::supportsDenormalization($data, $type, $format)) {
             return false;

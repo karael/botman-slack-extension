@@ -13,7 +13,7 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
  */
 class CommandDenormalizer implements DenormalizerInterface
 {
-    public function denormalize($data, $class, $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         return new CommandSlackEvent(
             $data['channel_id'],
@@ -24,7 +24,7 @@ class CommandDenormalizer implements DenormalizerInterface
         );
     }
 
-    public function supportsDenormalization($data, $type, $format = null)
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return
             SlackEventInterface::class === $type
@@ -32,5 +32,10 @@ class CommandDenormalizer implements DenormalizerInterface
             && isset($data['command'])
             && isset($data['response_url'])
         ;
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [SlackEventInterface::class => false];
     }
 }

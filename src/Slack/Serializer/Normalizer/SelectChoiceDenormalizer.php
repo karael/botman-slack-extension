@@ -13,7 +13,7 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
  */
 class SelectChoiceDenormalizer implements DenormalizerInterface
 {
-    public function denormalize($data, $class, $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         return new SelectChoiceSlackEvent(
             $data['actions'][0]['name'],
@@ -26,7 +26,7 @@ class SelectChoiceDenormalizer implements DenormalizerInterface
         );
     }
 
-    public function supportsDenormalization($data, $type, $format = null)
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return
             SlackEventInterface::class === $type
@@ -36,5 +36,10 @@ class SelectChoiceDenormalizer implements DenormalizerInterface
             && isset($data['actions'][0]['type'])
             && 'select' === $data['actions'][0]['type']
         ;
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [SlackEventInterface::class => false];
     }
 }

@@ -23,7 +23,7 @@ class VerificationUrlDenormalizer implements DenormalizerInterface
         $this->slackVerificationToken = $slackVerificationToken;
     }
 
-    public function denormalize($data, $class, $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         return new VerificationUrlSlackEvent(
             $this->slackVerificationToken,
@@ -32,7 +32,7 @@ class VerificationUrlDenormalizer implements DenormalizerInterface
         );
     }
 
-    public function supportsDenormalization($data, $type, $format = null)
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return
             SlackEventInterface::class === $type
@@ -40,5 +40,10 @@ class VerificationUrlDenormalizer implements DenormalizerInterface
             && isset($data['type'])
             && 'url_verification' === $data['type']
         ;
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [SlackEventInterface::class => false];
     }
 }

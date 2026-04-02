@@ -39,7 +39,7 @@ class SlackBotExtension extends Extension implements PrependExtensionInterface
         $this->verificationUrlToken = $verificationUrlToken;
     }
 
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('bot.yaml');
@@ -54,7 +54,7 @@ class SlackBotExtension extends Extension implements PrependExtensionInterface
             ->setArgument('$slackVerificationToken', $configs[0]['slack.verification_url.token']);
     }
 
-    public function prepend(ContainerBuilder $container)
+    public function prepend(ContainerBuilder $container): void
     {
         // FIXME Should be in a configuration node, but it's time saving
         $container->prependExtensionConfig('slack_bot', [

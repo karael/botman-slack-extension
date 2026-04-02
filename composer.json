@@ -11,7 +11,7 @@
     ],
     "config": {
         "platform": {
-            "php": "7.2.0"
+            "php": "8.2.0"
         },
         "preferred-install": {
             "*": "dist"
@@ -21,15 +21,15 @@
     "require": {
         "ext-json": "*",
         "psr/log": "^1.0 || ^2.0 || ^3.0",
-        "symfony/config": "^5.0 || ^6.0",
-        "symfony/event-dispatcher": "^5.0 || ^6.0",
-        "symfony/serializer": "^5.0 || ^6.0",
-        "symfony/validator": "^5.0 || ^6.0"
+        "symfony/config": "^6.4 || ^7.0",
+        "symfony/event-dispatcher": "^6.4 || ^7.0",
+        "symfony/serializer": "^6.4 || ^7.0",
+        "symfony/validator": "^6.4 || ^7.0"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.13",
-        "phpunit/phpunit": "^7.4",
-        "symfony/dependency-injection": "^4.1"
+        "friendsofphp/php-cs-fixer": "^3.0",
+        "phpunit/phpunit": "^9.5 || ^10.0 || ^11.0",
+        "symfony/dependency-injection": "^6.4 || ^7.0"
     },
     "suggest": {
         "botman/driver-slack": "If you want to send Slack message from PHP",

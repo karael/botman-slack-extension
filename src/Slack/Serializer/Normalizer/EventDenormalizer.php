@@ -13,12 +13,12 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
  */
 class EventDenormalizer implements DenormalizerInterface
 {
-    public function denormalize($data, $class, $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         return new EventSlackEvent($data['event']['type'], $data['event']['user']);
     }
 
-    public function supportsDenormalization($data, $type, $format = null)
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return
             SlackEventInterface::class === $type
@@ -26,5 +26,10 @@ class EventDenormalizer implements DenormalizerInterface
             && isset($data['type'])
             && 'event_callback' === $data['type']
         ;
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [SlackEventInterface::class => false];
     }
 }
