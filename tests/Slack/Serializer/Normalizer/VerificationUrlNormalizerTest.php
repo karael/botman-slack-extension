@@ -7,19 +7,19 @@ namespace Labdotgif\Tests\Slack\Serializer\Normalizer;
 use Labdotgif\Slack\Event\SlackEventInterface;
 use Labdotgif\Slack\Event\VerificationUrlSlackEvent;
 use Labdotgif\Slack\Serializer\Normalizer\VerificationUrlDenormalizer;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @author Sylvain Lorinet <sylvain.lorinet@gmail.com>
- *
- * @covers \Labdotgif\Slack\Serializer\Normalizer\VerificationUrlDenormalizer
  */
+#[CoversClass(VerificationUrlDenormalizer::class)]
 class VerificationUrlNormalizerTest extends TestCase
 {
-    /**
-     * @test
-     * @dataProvider supportsDenormalizationDataProvider
-     */
+    #[Test]
+    #[DataProvider('supportsDenormalizationDataProvider')]
     public function supportsDenormalization(bool $expectedReturn, array $data, string $type, string $format): void
     {
         $normalizer = new VerificationUrlDenormalizer('foo');
@@ -27,7 +27,7 @@ class VerificationUrlNormalizerTest extends TestCase
         $this->assertEquals($expectedReturn, $normalizer->supportsDenormalization($data, $type, $format));
     }
 
-    public function supportsDenormalizationDataProvider(): \Generator
+    public static function supportsDenormalizationDataProvider(): \Generator
     {
         // Wrong class type
         yield [
@@ -76,9 +76,7 @@ class VerificationUrlNormalizerTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function denormalize(): void
     {
         $normalizer = new VerificationUrlDenormalizer('foo');

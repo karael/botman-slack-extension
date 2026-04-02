@@ -6,31 +6,26 @@ namespace Labdotgif\Tests\Slack\Event;
 
 use Labdotgif\Slack\Event\SlackEventInterface;
 use Labdotgif\Slack\Event\VerificationUrlSlackEvent;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * @author Sylvain Lorinet <sylvain.lorinet@gmail.com>
  */
 class VerificationUrlSlackEventTest extends SlackEventTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function getSlackVerificationToken(): void
     {
         $this->assertEquals('foo', $this->createEvent()->getSlackVerificationToken());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getProvidedVerificationToken(): void
     {
         $this->assertEquals('bar', $this->createEvent()->getProvidedVerificationToken());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getChallenge(): void
     {
         $this->assertEquals('baz', $this->createEvent()->getChallenge());

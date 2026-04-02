@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Labdotgif\Tests\Slack\Event;
 
 use Labdotgif\Slack\Event\ResponseAwareSlackEvent;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -13,25 +14,20 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class ResponseAwareSlackEventTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function setResponse(): void
     {
         $event = $this->createEvent();
 
-        $this->assertAttributeEmpty('response', $event);
+        $this->assertNull($event->getResponse());
 
         $response = new Response();
         $event->setResponse($response);
 
-        $this->assertAttributeEquals($response, 'response', $event);
+        $this->assertSame($response, $event->getResponse());
     }
 
-    /**
-     * @test
-     * @depends setResponse
-     */
+    #[Test]
     public function getResponse(): void
     {
         $event = $this->createEvent();
