@@ -21,15 +21,16 @@
     "require": {
         "ext-json": "*",
         "psr/log": "^1.0 || ^2.0 || ^3.0",
-        "symfony/config": "^6.4 || ^7.0",
-        "symfony/event-dispatcher": "^6.4 || ^7.0",
-        "symfony/serializer": "^6.4 || ^7.0",
-        "symfony/validator": "^6.4 || ^7.0"
+        "symfony/config": "^7.0",
+        "symfony/event-dispatcher": "^7.0",
+        "symfony/http-foundation": "^7.0",
+        "symfony/serializer": "^7.0",
+        "symfony/validator": "^7.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.0",
         "phpunit/phpunit": "^9.5 || ^10.0 || ^11.0",
-        "symfony/dependency-injection": "^6.4 || ^7.0"
+        "symfony/dependency-injection": "^7.0"
     },
     "suggest": {
         "botman/driver-slack": "If you want to send Slack message from PHP",
